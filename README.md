@@ -128,6 +128,60 @@ tail -f /var/log/lscwp-cf-save.log
 
 ---
 
+## คำสั่งตรวจสอบ Log
+
+### ดู log รวมทั้งหมด
+```bash
+cat /var/log/lscwp-cf-save.log
+```
+
+### ดูเฉพาะเว็บที่ ✅ Pass
+```bash
+cat /var/log/lscwp-cf-save-pass.log
+```
+
+### ดูเฉพาะเว็บที่ ❌ Fail
+```bash
+cat /var/log/lscwp-cf-save-fail.log
+```
+
+### ดูเฉพาะเว็บที่ ⏭ Skip
+```bash
+cat /var/log/lscwp-cf-save-skip.log
+```
+
+### นับจำนวน Pass / Fail / Skip
+```bash
+echo "✅ Pass  : $(wc -l < /var/log/lscwp-cf-save-pass.log)"
+echo "❌ Fail  : $(wc -l < /var/log/lscwp-cf-save-fail.log)"
+echo "⏭  Skip  : $(wc -l < /var/log/lscwp-cf-save-skip.log)"
+```
+
+### ดู Fail วันนี้เท่านั้น
+```bash
+grep "$(date '+%Y-%m-%d')" /var/log/lscwp-cf-save-fail.log
+```
+
+### ดู Pass วันนี้เท่านั้น
+```bash
+grep "$(date '+%Y-%m-%d')" /var/log/lscwp-cf-save-pass.log
+```
+
+### ค้นหาเว็บที่ต้องการใน log
+```bash
+grep "domain.com" /var/log/lscwp-cf-save.log
+```
+
+### ล้าง log ทั้งหมด (รันใหม่สะอาด)
+```bash
+> /var/log/lscwp-cf-save.log
+> /var/log/lscwp-cf-save-pass.log
+> /var/log/lscwp-cf-save-fail.log
+> /var/log/lscwp-cf-save-skip.log
+```
+
+---
+
 ## Performance
 
 - **Parallel jobs** — คำนวณอัตโนมัติจาก CPU cores + RAM ที่เหลืออยู่
